@@ -21,5 +21,7 @@ class parking_place(object):
         self.lat = 0
         self.parktype = 0
         
-    def create_parkingplace(self):
+    def create_parkingplace(self, server_ip, port):
+        ser_ip = server_ip
+        ser_port = port
         
