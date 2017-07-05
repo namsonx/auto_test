@@ -8,7 +8,10 @@ import sys
 import argparse
 import robot
 import getpass
-from argparse import Action
+
+
+def runtest_and_collectlog(args, autotestlog):
+    autotestlog.write('------------------ Test run details ----------------\n')
 
 def main():
     
@@ -43,6 +46,8 @@ def main():
             
     autotestlog = open(autotestlogfile, 'w')
     autotestlog.write('Start running the auto test script')
+    
+    
     
     autotestlog.close()
             
