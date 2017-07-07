@@ -9,7 +9,9 @@ import argparse
 import glob
 import robot
 import getpass
+import subprocess
 
+workspace = None
 
 def runtests_and_collectlogs(args, config_files, autotestlog):
     autotestlog.write('------------------ Test run details ----------------\n')
@@ -35,6 +37,9 @@ def runtests_and_collectlogs(args, config_files, autotestlog):
                 
 
 def main():
+    
+    global workspace    
+    workspace = check_output('git rev-parse --show-toplevel', shell=True)
     
     if len(sys.argv) <= 2:
         print 'The server ip and port must be input. \n'
@@ -69,8 +74,10 @@ def main():
     autotestlog = open(autotestlogfile, 'w')
     autotestlog.write('Start running the auto test script')
 
-    config_files = ''
+    mapfile = workspace + '\\scripts\\config_map.conf'
     
+
+    config_files = ''    
     runtests_and_collectlogs(args, config_files, autotestlog)
     
     
