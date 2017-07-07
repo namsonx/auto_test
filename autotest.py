@@ -6,12 +6,33 @@
 import os
 import sys
 import argparse
+import glob
 import robot
 import getpass
 
 
-def runtest_and_collectlog(args, autotestlog):
+def runtests_and_collectlogs(args, config_files, autotestlog):
     autotestlog.write('------------------ Test run details ----------------\n')
+    
+    logs = []
+    status = 0
+    
+    print 'log dir: ', args.outputdir
+    try:
+        '''
+        for _f in glob.glob(args.outputdir + '\\*'):
+            autotestlog.write('\n Clean up file %s \n' % _f)
+            os.remove(_f)
+        '''
+        autotestlog.write('\n Clean up old log files ')
+        os.remove(args.outputdir + '\\output.xml')
+        os.remove(args.outputdir + '\\report.html')
+        os.remove(args.outputdir + '\\log.html')
+    except os.error:
+        pass
+    
+    
+                
 
 def main():
     
@@ -22,6 +43,7 @@ def main():
         
     local_dir = os.getcwd()    
     parser = argparse.ArgumentParser()
+    parser.add_argument('source', help='testsuite or testsuite directory')
     parser.add_argument('-s', '--server_ip', help='Input server ip address')
     parser.add_argument('-p', '--port', help='Input port of server')
     parser.add_argument('-tc', '--testconf', help='Adding test config file', action='append')
@@ -46,7 +68,10 @@ def main():
             
     autotestlog = open(autotestlogfile, 'w')
     autotestlog.write('Start running the auto test script')
+
+    config_files = ''
     
+    runtests_and_collectlogs(args, config_files, autotestlog)
     
     
     autotestlog.close()
