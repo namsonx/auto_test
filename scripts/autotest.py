@@ -9,7 +9,7 @@ import argparse
 import glob
 import robot
 import getpass
-import subprocess
+from subprocess import check_output
 
 workspace = None
 
@@ -40,6 +40,7 @@ def main():
     
     global workspace    
     workspace = check_output('git rev-parse --show-toplevel', shell=True)
+    workspace = workspace.strip(' \n\t')
     
     if len(sys.argv) <= 2:
         print 'The server ip and port must be input. \n'
@@ -76,7 +77,17 @@ def main():
 
     mapfile = workspace + '\\scripts\\config_map.conf'
     
-
+    config_map = {}
+    with open(mapfile, 'r') as f:
+        for line in f:
+            if line.endswith('\n'):
+                line = line.rstrip()
+            items = line.split(': ')
+            key, value = items[0], items[1]
+            config_map[key] = value
+            
+    print 'config map: ', config_map
+            
     config_files = ''    
     runtests_and_collectlogs(args, config_files, autotestlog)
     
