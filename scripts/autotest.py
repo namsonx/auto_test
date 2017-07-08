@@ -13,9 +13,12 @@ from subprocess import check_output
 
 workspace = None
 
-def runtests_and_collectlogs(args, config_files, autotestlog):
+def runtests_and_collectlogs(args, testdir_path, testsuites, config_map, autotestlog):
     autotestlog.write('------------------ Test run details ----------------\n')
     
+    config_files = []
+    test_name = []
+    test_conf = []
     logs = []
     status = 0
     
@@ -33,8 +36,22 @@ def runtests_and_collectlogs(args, config_files, autotestlog):
     except os.error:
         pass
     
+    for test in testsuites:
+        test_name.append(test.split('\\')[-1])
+        
+    for testsuite in test_name:
+        if testsuite in config_map:
+            config_files.append(testdir_path + '\\' + config_map[testsuite])
+            test_conf.append(config_map[testsuite])
+        else:
+            print sys.stderr, 'Could not find the testsuite in config_map.conf file'
+            sys.exit(1)
+
+    print 'test config files: ', config_files
+    print 'test name is: ', test_name
+    print 'test conf is: ', test_conf
     
-                
+    
 
 def main():
     
@@ -76,8 +93,8 @@ def main():
     autotestlog.write('Start running the auto test script')
 
     mapfile = workspace + '\\scripts\\config_map.conf'
-    
     config_map = {}
+    
     with open(mapfile, 'r') as f:
         for line in f:
             if line.endswith('\n'):
@@ -87,9 +104,18 @@ def main():
             config_map[key] = value
             
     print 'config map: ', config_map
-            
-    config_files = ''    
-    runtests_and_collectlogs(args, config_files, autotestlog)
+    
+    testsuites = []
+    if not args.source.endswith('.txt'):     # source is a folder which containning testsuites
+        print 'Will implement later'
+    else:       # source is a specific testsuite  
+        testsuites.append(args.source)
+        n = len(args.source.split('\\'))
+        testdir_path = args.source.rsplit('\\', 1)[0]
+        print 'testsuites is: ', testsuites
+        print 'test path is: ', testdir_path
+              
+    runtests_and_collectlogs(args,testdir_path, testsuites, config_map, autotestlog)
     
     
     autotestlog.close()
