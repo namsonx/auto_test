@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20170711 12:46:53.070" generator="Robot 3.0.2 (Python 2.7 on win32)">
+<suite source="C:\Users\mas2hc\Desktop\workspace\auto_test\robot\testsuites\autotest_firstscript.txt" id="s1" name="Autotest Firstscript">
+<test id="s1-t1" name="Create parking place">
+<kw name="Create Parking Place" library="ipm_lib">
+<msg timestamp="20170711 12:46:53.585" level="INFO">Starting new HTTP connection (1): localhost</msg>
+<status status="PASS" endtime="20170711 12:46:53.658" starttime="20170711 12:46:53.545"></status>
+</kw>
+<status status="PASS" endtime="20170711 12:46:53.658" critical="yes" starttime="20170711 12:46:53.541"></status>
+</test>
+<status status="PASS" endtime="20170711 12:46:53.662" starttime="20170711 12:46:53.086"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="1">Critical Tests</stat>
+<stat fail="0" pass="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="0" id="s1" name="Autotest Firstscript" pass="1">Autotest Firstscript</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

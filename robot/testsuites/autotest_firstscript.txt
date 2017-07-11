@@ -1,0 +1,10 @@
+*** Settings ***
+Library           ../lib/ipm_lib.py
+
+*** Variables ***
+${unicode}         auto012
+
+*** Test Cases ***
+Create parking place
+    [Tags]
+    create_parking_place

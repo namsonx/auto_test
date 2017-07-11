@@ -51,7 +51,9 @@ def runtests_and_collectlogs(args, testdir_path, testsuites, config_map, autotes
     print 'test name is: ', test_name
     print 'test conf is: ', test_conf
     
+    status = robot.run(testsuites[0])
     
+    print 'Runing status is: ', status
 
 def main():
     
@@ -115,7 +117,7 @@ def main():
         print 'testsuites is: ', testsuites
         print 'test path is: ', testdir_path
               
-    runtests_and_collectlogs(args,testdir_path, testsuites, config_map, autotestlog)
+    runtests_and_collectlogs(args, testdir_path, testsuites, config_map, autotestlog)
     
     
     autotestlog.close()
