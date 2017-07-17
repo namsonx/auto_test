@@ -8,6 +8,7 @@ import sys
 #import lib.objects
 import requests
 import json
+import protobuf.sample_pb2
 
 
 def get_place_info(place_id = None, place_name = ''):

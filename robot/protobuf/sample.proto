@@ -1,0 +1,28 @@
+syntax = "proto2";
+
+package sample;
+
+
+message Block {
+  optional int32 id = 1;
+  required string name = 2;
+  required int32 availability = 3 [default = 0];
+  required string unicode = 4;
+  required int32 type = 5 [default = 0];
+  optional int32 place_id = 6;
+}
+
+message Parking_place {
+  optional int32 id = 1;
+  required string unicode = 2;
+  required string name = 3;
+  required int32 availability = 4 [default = 0];
+  required string rule = 5 [default = "24hrs"];
+  required float lang = 6 [default = 11.546547652];
+  required float lat = 7 [default = 13.6578030063];
+  required int32 type = 8 [default = 0];
+  required string autoexit = 9 [default = "No"];
+  optional string createdby = 10 [default = "Admin"];
+  
+  repeated Block blocks = 11;
+}  
